@@ -70,6 +70,13 @@ impl ClientBuilder {
 		client_config.model_mapper = Some(model_mapper);
 		self
 	}
+
+	/// Set the base URL for the ClientConfig of this ClientBuilder.
+	pub fn with_base_url(mut self, base_url: String) -> Self {
+		let client_config = self.config.get_or_insert_with(ClientConfig::default);
+		client_config.base_url = Some(base_url);
+		self
+	}
 }
 
 impl ClientBuilder {
