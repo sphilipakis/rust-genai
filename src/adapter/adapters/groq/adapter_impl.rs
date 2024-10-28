@@ -38,7 +38,8 @@ impl Adapter for GroqAdapter {
 	}
 
 	fn get_service_url(model_iden: ModelIden, service_type: ServiceType) -> String {
-		OpenAIAdapter::util_get_service_url(model_iden, service_type, BASE_URL)
+		let base_url = model_iden.client_config.base_url().unwrap_or(&BASE_URL.to_string());
+		OpenAIAdapter::util_get_service_url(model_iden, service_type, base_url)
 	}
 
 	fn to_web_request_data(

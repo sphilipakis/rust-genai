@@ -36,7 +36,8 @@ impl Adapter for OpenAIAdapter {
 	}
 
 	fn get_service_url(model_iden: ModelIden, service_type: ServiceType) -> String {
-		Self::util_get_service_url(model_iden, service_type, BASE_URL)
+		let base_url = model_iden.client_config.base_url().unwrap_or(&BASE_URL.to_string());
+		Self::util_get_service_url(model_iden, service_type, base_url)
 	}
 
 	fn to_web_request_data(

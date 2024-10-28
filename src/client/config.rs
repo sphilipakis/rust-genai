@@ -7,6 +7,7 @@ pub struct ClientConfig {
 	pub(in crate::client) auth_resolver: Option<AuthResolver>,
 	pub(in crate::client) model_mapper: Option<ModelMapper>,
 	pub(in crate::client) chat_options: Option<ChatOptions>,
+	pub(in crate::client) base_url: Option<String>, // Pee5c
 }
 
 /// Chainable setters related to the ClientConfig.
@@ -28,6 +29,12 @@ impl ClientConfig {
 		self.chat_options = Some(options);
 		self
 	}
+
+	/// Set the base URL for the ClientConfig. // P007f
+	pub fn with_base_url(mut self, base_url: String) -> Self {
+		self.base_url = Some(base_url);
+		self
+	}
 }
 
 /// Getters for the fields of ClientConfig (as references).
@@ -45,5 +52,10 @@ impl ClientConfig {
 	/// Get a reference to the ChatOptions, if they exist.
 	pub fn chat_options(&self) -> Option<&ChatOptions> {
 		self.chat_options.as_ref()
+	}
+
+	/// Get a reference to the base URL, if it exists. // P0a03
+	pub fn base_url(&self) -> Option<&String> {
+		self.base_url.as_ref()
 	}
 }
